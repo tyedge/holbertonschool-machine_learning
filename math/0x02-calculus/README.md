@@ -1,0 +1,1 @@
+This project covers the calculus fundamentals for Machine Learning. 

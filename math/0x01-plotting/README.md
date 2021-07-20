@@ -1,0 +1,1 @@
+This project covers the basics of data visualization with matplotlib

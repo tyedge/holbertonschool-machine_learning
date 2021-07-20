@@ -1,1 +1,1 @@
-This project covers the basics of data visualization with matplotlib
+This repository contains the plotting project files.

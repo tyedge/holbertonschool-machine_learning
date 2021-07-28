@@ -26,7 +26,7 @@ class Exponential:
         """Calculates the value of the PDF for a given time period"""
 
         lamb = self.lambtha
-        ex_factor = e**-lamb*x
+        ex_factor = e**(-lamb * x)
 
         if x < 0:
             return 0
@@ -37,7 +37,7 @@ class Exponential:
         """Calculates the value of the CDF for a given time period"""
 
         lamb = self.lambtha
-        ex_factor = e**-lamb*x
+        ex_factor = e**(-lamb * x)
 
         if x < 0:
             return 0

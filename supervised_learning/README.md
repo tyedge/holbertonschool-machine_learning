@@ -1,0 +1,1 @@
+This repository contains the supervised learning projects for the Holberton School's machine learning specialization.

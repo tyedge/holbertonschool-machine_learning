@@ -33,3 +33,15 @@ class Binomial:
                 self.p = 1 - var / mu
                 self.n = int(round(mu / self.p))
                 self.p = float(mu / self.n)
+
+    def pmf(self, k):
+        """Calculates the value of the PMF for a given number of successes"""
+        if k < 0:
+            return 0
+        if type(k) is not int:
+            k = int(k)
+        pt1 = factorial_calc(self.n) / (factorial_calc(k) *
+                                        factorial_calc(self.n - k))
+        pt2 = self.p ** k
+        pt3 = (1 - self.p) ** (self.n - k)
+        return pt1 * pt2 * pt3

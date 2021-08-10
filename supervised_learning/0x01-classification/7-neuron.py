@@ -65,7 +65,7 @@ class Neuron:
         if type(alpha) is not float:
             raise TypeError("alpha must be a float")
         if alpha <= 0:
-            raise ValueError("alpha must be a positive")
+            raise ValueError("alpha must be positive")
         if verbose or graph:
             if type(step) is not int:
                 raise TypeError("step must be an integer")
@@ -74,16 +74,17 @@ class Neuron:
         cost = []
         rations = []
         for i in range(iterations + 1):
-            self.gradient_descent(X, Y, self.forward_prop(X), alpha)
-            if i == iterations or i % step == 0:
+            '''self.gradient_descent(X, Y, self.forward_prop(X), alpha)'''
+            if i % step == 0 or i == iterations:
                 rations.append(i)
                 cost.append(self.cost(Y, self.forward_prop(X)))
-                if verbose is True:
+                if verbose:
                     print(
                         "Cost after {} iterations: {}".
                         format(i, self.cost(Y, self.forward_prop(X))))
+            self.gradient_descent(X, Y, self.forward_prop(X), alpha)
         if graph:
-            plt.plot(rations, cost, color="blue")
+            plt.plot(rations, cost)
             plt.xlabel("iteration")
             plt.ylabel("cost")
             plt.title("Training Cost")

@@ -19,6 +19,8 @@ classification"""
         self.cache = {}
         self.weights = {}
         for i in range(self.L):
+            if type(layers[i]) is not int or layers[i] < 1:
+                raise TypeError("layers must be a list of positive integers")
             if i == 0:
                 self.weights["W{}".format(i + 1)] = (np.random.randn(
                     layers[i], nx) * np.sqrt(2 / nx))

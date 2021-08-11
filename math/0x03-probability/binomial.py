@@ -45,3 +45,14 @@ class Binomial:
         pt2 = self.p ** k
         pt3 = (1 - self.p) ** (self.n - k)
         return pt1 * pt2 * pt3
+
+    def cdf(self, k):
+        """Calculates the value of the CDF for a given number of successes"""
+        if k < 0:
+            return 0
+        if type(k) is not int:
+            k = int(k)
+        ret = 0
+        for i in range(k + 1):
+            ret += self.pmf(i)
+        return ret

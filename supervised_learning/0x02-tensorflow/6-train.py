@@ -14,17 +14,8 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
           alpha, iterations, save_path="/tmp/model.ckpt"):
     """This function builds, trains, and saves a neural network classifier"""
 
-    '''xtra = X_train
-    tray = Y_train
-    valx = X_valid
-    valy = Y_valid
-    lays = layer_sizes
-    reps = iterations
-    rpt = 100
-    sp = save_path'''
-
     x, y = create_placeholders(X_train.shape[1], Y_train.shape[1])
-    y_pred = forward_prop(x, lays, activations)
+    y_pred = forward_prop(x, layer_sizes, activations)
     loss = calculate_loss(y, y_pred)
     accuracy = calculate_accuracy(y, y_pred)
     train_op = create_train_op(loss, alpha)

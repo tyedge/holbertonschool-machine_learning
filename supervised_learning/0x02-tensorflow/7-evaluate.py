@@ -19,5 +19,6 @@ def evaluate(X, Y, save_path):
         loss = tf.get_collection("loss")[0]
         acc = tf.get_collection("accuracy")[0]
 
-    return sess.run(pred, {x: X, y: Y}), sess.run(
-        accuracy, {x: X, y: Y}), sess.run(loss, {x: X, y: Y})
+    '''return sess.run(pred, {x: X, y: Y}), sess.run(
+        acc, {x: X, y: Y}), sess.run(loss, {x: X, y: Y})'''
+    return sess.run([pred, acc, loss], {x: X, y: Y})

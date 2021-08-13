@@ -37,7 +37,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     tf.add_to_collection('train_op', top)
 
     init = tf.global_variables_initializer()
-    savenn = tf.train.Saver()
+    saver = tf.train.Saver()
 
     with tf.Session() as sess:
         sess.run(init)
@@ -52,4 +52,4 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 print("\tValidation Accuracy: {}".format(vacc))
             if i < reps:
                 sess.run(top, {x: xtra, y: tray})
-    return savenn.save(sess, sp)
+    return saver.save(sess, sp)

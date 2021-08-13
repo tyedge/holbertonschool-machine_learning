@@ -21,7 +21,6 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     lays = layer_sizes
     reps = iterations
     rpt = 100
-    sp = save_path
 
     x, y = create_placeholders(xtra.shape[1], tray.shape[1])
     pred = forward_prop(x, lays, activations)
@@ -42,8 +41,8 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     with tf.Session() as sess:
         sess.run(init)
         for i in range(reps + 1):
-            tacc, losst = sess.run([acc, loss], feed_dict={x: xtra, y: tray})
-            vacc, vloss = sess.run([acc, loss], feed_dict={x: valx, y: valy})
+            tacc, losst = sess.run([acc, loss], {x: xtra, y: tray})
+            vacc, vloss = sess.run([acc, loss], {x: valx, y: valy})
             if i % rpt == 0 or i == reps:
                 print("After {} iterations:".format(i))
                 print("\tTraining Cost: {}".format(losst))
@@ -51,5 +50,5 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 print("\tValidation Cost: {}".format(vloss))
                 print("\tValidation Accuracy: {}".format(vacc))
             if i < reps:
-                sess.run(top, feed_dict={x: xtra, y: tray})
-    return saver.save(sess, sp)
+                sess.run(top, {x: xtra, y: tray})
+    return saver.save(sess, save_path)

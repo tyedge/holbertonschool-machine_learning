@@ -7,10 +7,9 @@ import tensorflow as tf
 
 def evaluate(X, Y, save_path):
     """This function evaluates the output of a neural network"""
-    sp = save_path
     with tf.Session() as sess:
         saver = tf.train.import_meta_graph(sp + ".meta")
-        saver.restore(sess, sp)
+        saver.restore(sess, save_path)
 
         x = tf.get_collection('x')[0]
         y = tf.get_collection('y')[0]

@@ -51,4 +51,5 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 print("\tValidation Accuracy: {}".format(vacc))
             if i < reps:
                 sess.run(top, {x: xtra, y: tray})
-    return saver.save(sess, save_path)
+        save_path = saver.save(sess, save_path)
+    return save_path

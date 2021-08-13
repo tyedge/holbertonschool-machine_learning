@@ -12,13 +12,11 @@ def evaluate(X, Y, save_path):
         saver = tf.train.import_meta_graph(sp + ".meta")
         saver.restore(sess, sp)
 
-        x = tf.get_collection("x")[0]
-        y = tf.get_collection("y")[0]
+        x = tf.get_collection('x')[0]
+        y = tf.get_collection('y')[0]
 
-        pred = tf.get_collection("y_pred")[0]
-        loss = tf.get_collection("loss")[0]
-        acc = tf.get_collection("accuracy")[0]
+        pred = tf.get_collection('y_pred')[0]
+        loss = tf.get_collection('loss')[0]
+        acc = tf.get_collection('accuracy')[0]
 
-    '''return sess.run(pred, {x: X, y: Y}), sess.run(
-        acc, {x: X, y: Y}), sess.run(loss, {x: X, y: Y})'''
     return sess.run([pred, acc, loss], {x: X, y: Y})

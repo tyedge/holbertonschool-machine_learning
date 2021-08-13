@@ -50,5 +50,6 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 print("\tTraining Accuracy: {}".format(tacc))
                 print("\tValidation Cost: {}".format(vloss))
                 print("\tValidation Accuracy: {}".format(vacc))
-            sess.run(top, {x: xtra, y: tray})
+            if i < reps:
+                sess.run(top, {x: xtra, y: tray})
     return savenn.save(sess, sp)

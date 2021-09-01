@@ -2,7 +2,6 @@
 """This module contains a function that builds a neural network with the Keras
 library"""
 
-import numpy as np
 import tensorflow.keras as K
 
 

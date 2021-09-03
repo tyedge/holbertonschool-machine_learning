@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""This module contains a function that performs a convolution on images with
-channels"""
+"""This module contains a function that performs a convolution on images using
+multiple kernels"""
 
 import numpy as np
 
 
-def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
-    """This function performs a convolution on images with channels"""
+def convolve(images, kernels, padding='same', stride=(1, 1)):
+    """This function performs a convolution on images using multiple kernels"""
     m, h, w, c = images.shape
-    kh, kw, kc = kernel.shape
+    kh, kw, kc, nc = kernels.shape
     sh, sw = stride
     if type(padding) is tuple:
         ph, pw = padding
@@ -24,10 +24,11 @@ def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
     oh = int((h + 2 * ph - kh) / sh + 1)
     ow = int((w + 2 * pw - kw) / sw + 1)
 
-    out = np.zeros((m, oh, ow))
+    out = np.zeros((m, oh, ow, nc))
     for i in range(oh):
         for j in range(ow):
-            out[:, i, j] = (kernel * padder[:, i * sh:i * sh + kh,
-                                            j * sw:j * sw + kw]).sum(
-                                                axis=(1, 2, 3))
+            for n in range(nc):
+                out[:, i, j, n] = (kernels[:, :, :, n] * padder[
+                    :, i * sh:i * sh + kh, j * sw:j * sw + kw]).sum(
+                        axis=(1, 2, 3))
     return out

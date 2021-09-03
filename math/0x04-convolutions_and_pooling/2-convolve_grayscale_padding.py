@@ -14,7 +14,7 @@ padding"""
     padder = np.pad(images, pad_width=((0, 0), (ph, ph), (pw, pw)),
                     mode='constant', constant_values=0)
     oh = h + (2 * ph) - kh + 1
-    ow = h + (2 * pw) - kh + 1
+    ow = h + (2 * pw) - kw + 1
     out = np.zeros((m, oh, ow))
     for i in range(oh):
         for j in range(ow):

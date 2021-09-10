@@ -13,7 +13,7 @@ a neural network"""
     sh, sw = stride
 
     if padding == "valid":
-        ph, pw = 0,0
+        ph, pw = 0, 0
 
     if padding == "same":
         ph = int(((h_prev - 1) * sh - h_prev + kh) / 2)
@@ -33,4 +33,5 @@ a neural network"""
                 out[:, i, j, n] = (W[:, :, :, n] * padder[
                     :, i * sh:i * sh + kh, j * sw:j * sw + kw, :]).sum(
                         axis=(1, 2, 3))
-    return activation(out[:, i, j, n] + b[0, 0, 0, n])
+                out[:, i, j, n] = activation(out[:, i, j, n] + b[0, 0, 0, n])
+    return out

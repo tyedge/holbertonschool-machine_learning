@@ -44,6 +44,6 @@ neural network"""
                                              k * sw:k * sw + kw, :] * dZ[
                                                  i, j, k, n]
     if padding is 'same':
-        dA_prev = dA_prev[:, ph:dA_prev.shape[0]-ph, pw:dA_prev.shape[1]-pw, :]
+        dA_prev = dA_prev[:, ph:-ph, pw:-pw, :]
 
     return dA_prev, dW, db

@@ -33,5 +33,4 @@ a neural network"""
                 out[:, i, j, n] = (W[:, :, :, n] * padder[
                     :, i * sh:i * sh + kh, j * sw:j * sw + kw, :]).sum(
                         axis=(1, 2, 3))
-                out[:, i, j, n] = activation(out[:, i, j, n] + b[0, 0, 0, n])
-    return out
+    return activation(out + b)

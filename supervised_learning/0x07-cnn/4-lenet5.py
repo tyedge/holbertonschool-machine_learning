@@ -15,7 +15,7 @@ using tensorflow"""
     pool1 = tf.layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(conv1)
     conv2 = tf.layers.Conv2D(filters=6, kernel_size=(5, 5), padding="valid",
                              activation=relu, kernel_initializer=init)(pool1)
-    pool2 = tf.layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(conv1)
+    pool2 = tf.layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(conv2)
     flat = tf.layers.Flatten()(pool2)
     full1 = tf.layers.Dense(units=120, activation=relu,
                             kernel_initializer=init)(flat)

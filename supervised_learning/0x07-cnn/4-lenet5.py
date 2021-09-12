@@ -13,7 +13,7 @@ using tensorflow"""
     conv1 = tf.layers.Conv2D(filters=6, kernel_size=(5, 5), padding="same",
                              activation=relu, kernel_initializer=init)(x)
     pool1 = tf.layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(conv1)
-    conv2 = tf.layers.Conv2D(filters=6, kernel_size=(5, 5), padding="valid",
+    conv2 = tf.layers.Conv2D(filters=16, kernel_size=(5, 5), padding="valid",
                              activation=relu, kernel_initializer=init)(pool1)
     pool2 = tf.layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(conv2)
     flat = tf.layers.Flatten()(pool2)

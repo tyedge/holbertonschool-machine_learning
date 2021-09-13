@@ -41,7 +41,8 @@ using keras"""
                              kernel_initializer=init)(full2)
 
     kmod = K.Model(X, fullout)
-    kmod.compile(optimizer=K.optimizers.Adam(), loss="categorical_crossentropy",
+    kmod.compile(optimizer=K.optimizers.Adam(),
+                 loss="categorical_crossentropy",
                  metrics=["accuracy"])
 
     return kmod

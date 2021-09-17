@@ -15,7 +15,7 @@ Residual Learning for Image Recognition (2015)"""
 
     conv = K.layers.Conv2D(filters=64, kernel_size=(7, 7), strides=(2, 2),
                            padding="same", kernel_initializer=init)(data)
-    norm = K.layers.BatchNormalization(axis=3)(conv)
+    norm = K.layers.BatchNormalization()(conv)
     act = K.layers.Activation("relu")(norm)
     pool = K.layers.MaxPool2D(pool_size=(3, 3), padding="same",
                               strides=(2, 2))(act)

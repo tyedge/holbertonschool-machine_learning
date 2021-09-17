@@ -28,6 +28,7 @@ Densely Connected Convolutional Networks"""
     X, nb_filters = dense_block(X, nb_filters, growth_rate, 16)
 
     avgpool = K.layers.AveragePooling2D(pool_size=(7, 7), strides=(1, 1))(X)
-    out = K.layers.Dense(1000, activation="softmax")(avgpool)
+    out = K.layers.Dense(1000, activation="softmax",
+                         kernel_initializer=init)(avgpool)
 
     return K.Model(inputs=data, outputs=out)

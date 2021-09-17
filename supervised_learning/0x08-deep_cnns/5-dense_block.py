@@ -21,6 +21,6 @@ Convolutional Networks"""
                                 padding="same", kernel_initializer=init)(act2)
 
         nb_filters += growth_rate
-        X = K.layers.concatenate([conv2, X])
+        X = K.layers.concatenate([X, conv2])
 
     return X, nb_filters

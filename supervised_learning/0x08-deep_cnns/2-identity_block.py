@@ -22,6 +22,6 @@ Learning for Image Recognition (2015)"""
     conv3 = K.layers.Conv2D(filters=F12, kernel_size=(1, 1), padding="same",
                             kernel_initializer=init)(act2)
     norm3 = K.layers.BatchNormalization(axis=3)(conv3)
-    added = K.layers.Add()([A_prev, norm3])
+    added = K.layers.Add()([norm3, A_prev])
     out = K.layers.Activation("relu")(added)
     return out

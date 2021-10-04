@@ -1,0 +1,1 @@
+This repository contains the object detection project files.

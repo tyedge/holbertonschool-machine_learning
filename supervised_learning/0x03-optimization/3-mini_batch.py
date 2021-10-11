@@ -11,7 +11,6 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
                      save_path="/tmp/model.ckpt"):
     """This function trains a loaded neural network model using mini-batch
 gradient descent"""
-
     with tf.Session() as sess:
         saver = tf.train.import_meta_graph(load_path + ".meta")
         saver.restore(sess, load_path)
@@ -36,23 +35,23 @@ gradient descent"""
                 start = 0
                 stop = start + batch_size
 
-                for x in range(1, iters + 1):
+                for k in range(1, iters + 1):
 
-                    sess.run(train_op, {x: X_t[start:stop],
-                                        y: Y_t[start:stop]})
+                    sess.run(train_op, {x: Xert[start:stop],
+                                        y: Yert[start:stop]})
 
-                    if not x % 100 and x != 0:
+                    if not k % 100 and x != 0:
                         rep = X_train.shape[0] % batch_size
                         accure, losse = sess.run([accur, loss],
                                                  {x: Xert[start:stop],
                                                   y: Yert[start:stop]})
 
-                        print("\tStep {}:".format(x))
+                        print("\tStep {}:".format(k))
                         print("\t\tCost: {}".format(losse))
                         print("\t\tAccuracy: {}".format(accure))
 
                         start += batch_size
-                        if x + 1 == iters and rep != 0:
+                        if k + 1 == iters and rep != 0:
                             stop = start + rep
                         else:
                             stop = start + batch_size

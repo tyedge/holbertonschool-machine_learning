@@ -125,14 +125,15 @@ attributes __weights and __cache"""
             filename = filename + ".pkl"
         with open(filename, "wb") as f:
             pickle.dump(self, f)
+            f.close()
 
     @staticmethod
     def load(filename):
         """This static method loads a pickled DeepNeuralNetwork object"""
         try:
-            with open(filename, "rb") as file:
-                lowed = pickle.load(file)
-                file.close()
+            with open(filename, "rb") as f:
+                lowed = pickle.load(f)
+                f.close()
                 return lowed
         except FileNotFoundError:
             return None

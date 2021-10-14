@@ -123,9 +123,9 @@ attributes __weights and __cache"""
         """This method saves the instance object to a file in pickle format"""
         if filename.endswith(".pkl") is not True:
             filename = filename + ".pkl"
-        with open(filename, "wb") as file:
-            pickle.dump(self, file)
-            file.close()
+        with open(filename, "wb") as f:
+            pickle.dump(self, f)
+            f.close()
 
     @staticmethod
     def load(filename):

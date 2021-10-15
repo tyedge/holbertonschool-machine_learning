@@ -121,8 +121,8 @@ attributes __weights and __cache"""
 
     def save(self, filename):
         """This method saves the instance object to a file in pickle format"""
-        with open(filename, "wb") as f:
-            Pickler(f).dump(self)
+        with open(str(filename), 'wb') as f:
+            return pickle.dump(self, f)
 
     @staticmethod
     def load(filename):

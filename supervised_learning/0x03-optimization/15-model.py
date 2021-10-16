@@ -92,12 +92,12 @@ gradient descent"""
     accur = tf.get_collection('accuracy')[0]
     loss = tf.get_collection('loss')[0]
     train_op = tf.get_collection('train_op')[0]
-    lrd = tf.get_collection('lrd')[0]
+    alpha = tf.get_collection('alpha')[0]
     _step = tf.get_collection('step')[0]
 
     for i in range(epochs + 1):
         sess.run(_step.assign(i))
-        sess.run(lrd)
+        sess.run(alpha)
         acct, losst = sess.run([accur, loss], {x: X_train, y: Y_train})
         vacc, vloss = sess.run([accur, loss], {x: X_valid, y: Y_valid})
         print("After {} epochs:".format(i))
@@ -163,8 +163,8 @@ decay, and batch normalization"""
     _step = tf.Variable(0, trainable=False)
     tf.add_to_collection('step', _step)
 
-    lrd = learning_rate_decay(alpha, decay_rate, _step, 1)
-    tf.add_to_collection('lrd', lrd)
+    alpha = learning_rate_decay(alpha, decay_rate, _step, 1)
+    tf.add_to_collection('alpha', alpha)
 
     train_op = create_Adam_op(loss, alpha, beta1, beta2, epsilon)
     tf.add_to_collection('train_op', train_op)

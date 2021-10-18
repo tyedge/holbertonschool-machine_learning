@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Notes """
+"""This module contains the model for the DeepNeuralNetwork class"""
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,7 +8,8 @@ import pickle
 
 class DeepNeuralNetwork:
     def __init__(self, nx, layers):
-        """ Notes """
+        """This class defines a deep neural network performing binary
+classification"""
         if type(nx) is not int:
             raise TypeError("nx must be an integer")
         if nx < 1:
@@ -34,21 +35,23 @@ class DeepNeuralNetwork:
 
     @property
     def L(self):
-        """ Notes """
+        """This function is the getter function for private attribute L"""
         return self.__L
 
     @property
     def cache(self):
-        """ Notes """
+        """This function is the getter function for private attribute cache"""
         return self.__cache
 
     @property
     def weights(self):
-        """ Notes """
+        """This function is the getter function for private attribute
+weights"""
         return self.__weights
 
     def forward_prop(self, X):
-        """ Notes """
+        """This method calculates the forward propagation of the neural
+network"""
         self.__cache['A0'] = X
 
         for i in range(self.__L):
@@ -68,11 +71,12 @@ class DeepNeuralNetwork:
         return self.__cache[af], self.__cache
 
     def cost(self, Y, A):
-        """ Notes """
+        """This method calculates the cost of the model using logistic
+regression"""
         return (-1 / (Y.shape[1])) * np.sum(Y * np.log(A))
 
     def evaluate(self, X, Y):
-        """ Notes """
+        """This method evaluates the neural network’s predictions"""
         self.forward_prop(X)[0]
         a = "A{}".format(self.__L)
         macs = np.amax(self.__cache[a], axis=0)
@@ -80,7 +84,8 @@ class DeepNeuralNetwork:
                 self.cost(Y, self.__cache[a]))
 
     def gradient_descent(self, Y, cache, alpha=0.05):
-        """ Notes """
+        """This method calculates one pass of gradient descent on the neural
+network"""
         sz = Y.shape[1]
         diff = self.__cache["A{}".format(self.__L)] - Y
         for i in range(self.__L, 0, -1):
@@ -96,7 +101,8 @@ class DeepNeuralNetwork:
 
     def train(self, X, Y, iterations=5000, alpha=0.05,
               verbose=True, graph=True, step=100):
-        """ Notes """
+        """This method trains the deep neural network by updating the private
+attributes __weights and __cache"""
         if type(iterations) is not int:
             raise TypeError("iterations must be an integer")
         if iterations <= 0:
@@ -130,7 +136,7 @@ class DeepNeuralNetwork:
         return self.evaluate(X, Y)
 
     def save(self, filename):
-        """ Notes """
+        """This method saves the instance object to a file in pickle format"""
         if not filename:
             return None
         if filename[-4:] != ".pkl":
@@ -140,7 +146,7 @@ class DeepNeuralNetwork:
 
     @staticmethod
     def load(filename):
-        """ Notes """
+        """This static method loads a pickled DeepNeuralNetwork object"""
         try:
             with open(filename, 'rb') as f:
                 ret = pickle.load(f)

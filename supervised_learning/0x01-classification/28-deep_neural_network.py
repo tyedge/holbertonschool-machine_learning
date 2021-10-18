@@ -107,10 +107,10 @@ regression"""
 network"""
         cpy = self.__weights.copy()
         sz = Y.shape[1]
-        a = "A{}".format(i + 1)
-        w = "W{}".format(i + 1)
-        b = "b{}".format(i + 1)
         for i in reversed(range(self.__L)):
+            a = "A{}".format(i + 1)
+            w = "W{}".format(i + 1)
+            b = "b{}".format(i + 1)
             if i == self.__L - 1:
                 diff = cache[a] - Y
             else:

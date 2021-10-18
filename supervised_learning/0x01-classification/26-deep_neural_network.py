@@ -117,7 +117,7 @@ attributes __weights and __cache"""
                 raise ValueError("step must be positive and <= iterations")
         cost = []
         iters = []
-        for i in range(iterations + 1):
+        for i in range(iterations):
             self.forward_prop(X)
             self.gradient_descent(Y, self.cache, alpha)
             if i % step == 0 or i == iterations:

@@ -7,7 +7,7 @@ import pickle
 
 
 class DeepNeuralNetwork:
-"""This class defines a deep neural network performing binary
+    """This class defines a deep neural network performing binary
 classification"""
     def __init__(self, nx, layers):
         """This function initializes the data members of the Neuron class"""

@@ -85,7 +85,6 @@ network"""
                 else:
                     self.__cache[af] = np.tanh(z)
             else:
-                t = np.exp(Z)
                 self.__cache[af] = (np.exp(z) / np.sum(np.exp(z),
                                                        axis=0, keepdims=True))
         return self.__cache[af], self.__cache

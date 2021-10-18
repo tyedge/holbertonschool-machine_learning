@@ -10,6 +10,7 @@ class DeepNeuralNetwork:
     """This class defines a deep neural network performing binary
 classification"""
     def __init__(self, nx, layers):
+        """This function initializes the data members of the Neuron class"""
         if type(nx) is not int:
             raise TypeError("nx must be an integer")
         if nx < 1:
@@ -92,8 +93,8 @@ network"""
             b = "b{}".format(i)
             dub = (1 / sz) * np.matmul(diff, self.__cache[a].T)
             bee = (1 / sz) * np.sum(diff, axis=1, keepdims=True)
-            diff = np.matmul(self.__weights[w].T, diff)
-            * (self.__cache[a] * (1 - self.__cache[a]))
+            diff = np.matmul(self.__weights[w].T, diff) * (
+                self.__cache[a] * (1 - self.__cache[a]))
             self.__weights[w] = self.__weights[w] - alpha * dub
             self.__weights[b] = self.__weights[b] - alpha * bee
 

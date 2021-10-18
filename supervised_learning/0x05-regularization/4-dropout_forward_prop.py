@@ -17,11 +17,12 @@ def dropout_forward_prop(X, weights, L, keep_prob):
         ckey1 = "A{}".format(str(i + 1))
         ckey2 = "D{}".format(str(i + 1))
         z = np.matmul(weights[weight], cache[ckey0]) + weights[bias]
-        if (i == (L - 1)):
-            cache[ckey1] = np.exp(z) / np.sum(np.exp(z), axis=0)
+        d = np.random.binomial(1, p=keep_prob, size=z.shape)
+        if i == L - 1:
+            cache[ckey1] = (np.exp(z)/np.sum(np.exp(z), axis=0, keepdims=True))
         else:
             cache[ckey1] = np.tanh(z)
-            cache[ckey2] = np.random.binomial(1, p=keep_prob, size=z.shape)
-            cache[ckey1] *= cache[ckey2]
+            cache[ckey2] = d
+            cache[ckey1] *= d
             cache[ckey1] = cache[ckey1] / keep_prob
     return cache

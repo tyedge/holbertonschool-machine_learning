@@ -9,24 +9,20 @@ def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
     """This function updates the weights of a neural network with Dropout
 regularization using gradient descent"""
 
-    sz = Y.shape[1]
     cpy = weights.copy()
-
-    for i in range(L, 0, -1):
-        a = "A{}".format(i)
-        ap = cache["A{}".format(i - 1)]
-        w = cpy.get("W{}".format(i))
-        b = cpy.get("b{}".format(i))
-        if i == L:
-            diff = cache[a] - Y
+    sz = Y.shape[1]
+    for i in reversed(range(L)):
+        if i == L - 1:
+            diff = cache["A{}".format(i + 1)] - Y
+            dub = (np.matmul(cache["A{}".format(i)], diff.T) / sz).T
         else:
-            diff = np.matmul(cpy.get("W{}".format(i + 1)).T, dp) * (
-                1 - (cache[a] ** 2))
-        if i != L:
-            diff = cache["D{}".format(i)] * diff / (keep_prob)
-
-        dub = np.matmul(diff, ap.T) / sz
+            d1 = np.matmul(cpy["W{}".format(i + 2)].T, dp)
+            d2 = 1 - cache["A{}".format(i+1)] ** 2
+            diff = d1 * d2
+            diff *= cache["D{}".format(i + 1)]
+            diff /= keep_prob
+            dub = np.matmul(diff, cache["A{}".format(i)].T) / sz
         bee = np.sum(diff, axis=1, keepdims=True) / sz
-        weights["W{}".format(i)] -= (dub * alpha)
-        weights["b{}".format(i)] -= (bee * alpha)
+        weights["W{}".format(i + 1)] = cpy["W{}".format(i + 1)] - alpha * dub
+        weights["b{}".format(i + 1)] = cpy["b{}".format(i + 1)] - alpha * bee
         dp = diff

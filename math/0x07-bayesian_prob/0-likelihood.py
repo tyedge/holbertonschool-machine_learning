@@ -22,5 +22,5 @@ to 0")
     if np.any(P > 1) or np.any(P < 0):
         raise ValueError("All values in P must be in the range [0, 1]")
 
-    return ((np.math.factorial(n)) / (np.math.factorial(x) * (
-        np.math.factorial(n - x))) * P ** x * (1 - P) ** (n - x))
+    return (np.math.factorial(n) / (np.math.factorial(x) * np.math.factorial(
+        n - x))) * (P ** x) * (1 - P) ** (n - x)

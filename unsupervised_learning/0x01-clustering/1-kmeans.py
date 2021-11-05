@@ -26,8 +26,8 @@ def kmeans(X, k, iterations=1000):
 
     for i in range(iterations):
         cpy = np.copy(cent)
-        dist = np.linalg.norm(X[:, None] - cent, axis=-1)
-        cls = np.argmin(dist, axis=-1)
+        dist = np.linalg.norm(X - cent[:, np.newaxis], axis=2)
+        cls = np.argmin(dist, axis=0)
 
         for j in range(k):
             if len(X[j == cls]) == 0:

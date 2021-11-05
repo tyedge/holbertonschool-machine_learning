@@ -13,17 +13,17 @@ the Bayesian Information Criterion"""
         return None, None, None, None
     if kmax is None:
         kmax = X.shape[0]
-    if kmin >= X.shape[0] or kmax > X.shape[0]:
-        return None, None, None, None
     if type(kmin) is not int or kmin < 1:
         return None, None, None, None
     if type(kmax) is not int or kmax < 1:
         return None, None, None, None
     if kmin >= kmax:
         return None, None, None, None
+    if kmin >= X.shape[0] or kmax > X.shape[0]:
+        return None, None, None, None
     if type(iterations) is not int or iterations <= 0:
         return None, None, None, None
-    if type(tol) is not float or tol <= 0:
+    if type(tol) is not float or tol < 0:
         return None, None, None, None
     if type(verbose) is not bool:
         return None, None, None, None
@@ -41,8 +41,9 @@ the Bayesian Information Criterion"""
         bic = p * np.log(n) - 2 * v
         b.append(bic)
 
-    best_k = bk[np.argmin(b)]
-    best_result = bres[np.argmin(b)]
+    mini = np.argmin(b)
+    best_k = bk[mini]
+    best_result = bres[mini]
     lll = np.array(lll)
     b = np.array(b)
 

@@ -37,4 +37,7 @@ def kmeans(X, k, iterations=1000):
         if (cpy == cent).all():
             return cent, cls
 
+    dist = np.linalg.norm(X - cent[:, np.newaxis], axis=2)
+    cls = np.argmin(dist, axis=0)
+
     return cent, cls

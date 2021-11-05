@@ -18,7 +18,7 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
         return None, None
     if kmax and kmax <= kmin:
         return None, None
-    if not kmax:
+    if kmax is None:
         kmax = X.shape[0]
     if type(iterations) is not int:
         return None, None
@@ -37,5 +37,5 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
         var = variance(X, C)
         vlist.append(var)
     for j in vlist:
-        d_vars.append(vlist[0] - float(j))
+        d_vars.append(vlist[0] - j)
     return results, d_vars

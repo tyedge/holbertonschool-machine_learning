@@ -27,7 +27,8 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
 
     for i in range(iterations):
         if verbose and i % 10 == 0:
-            print("Log Likelihood after {} iterations: {:0.5f}".format(i, lky))
+            print("Log Likelihood after {} iterations: {}".format(i,
+                                                                  lky.round(5)))
         pi, m, S = maximization(X, g)
         g, lky = expectation(X, pi, m, S)
 
@@ -37,6 +38,6 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
 
     i += 1
     if verbose:
-        print("Log Likelihood after {} iterations: {:0.5f}".format(i, lky))
+        print("Log Likelihood after {} iterations: {}".format(i, lky.round(5)))
 
     return pi, m, S, g, lky
